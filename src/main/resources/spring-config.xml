@@ -4,7 +4,14 @@
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
 	<bean id="SimpleHello" class="com.howellxu.simple.SimpleHello">
-		<property name="talker" value="abc"></property>
+		<!-- <property name="talker" value="abc"></property> -->
+		<constructor-arg value="abc"></constructor-arg>
+		<constructor-arg ref="SimpleProp"></constructor-arg>
 	</bean>
- 
+	
+	<bean id="SimpleProp" class="com.howellxu.simple.SimpleProp"></bean> 
+	<!-- bean工厂方式创建bean -->
+	<bean id="Stage" class="com.howellxu.beanFactory.Stage" factory-method="getInstance"></bean>
+	
+	
 </beans>
