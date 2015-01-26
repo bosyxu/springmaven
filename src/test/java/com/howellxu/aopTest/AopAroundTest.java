@@ -4,6 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.howellxu.aop.Actor;
+import com.howellxu.aop.Thinker;
+import com.howellxu.aop.Volunteer;
 
 public class AopAroundTest {
 
@@ -15,5 +17,8 @@ public class AopAroundTest {
 		Actor actor = (Actor) context  
                 .getBean("actor");  
 		actor.perform("well done!");
+		
+		Thinker thinker = (Thinker)context.getBean("thinker");
+		thinker.thinkOfSomething("want to do");
 	}
 }

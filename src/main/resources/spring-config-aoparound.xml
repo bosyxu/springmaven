@@ -11,13 +11,23 @@
 	
 	<bean id="audience" class="com.howellxu.aop.Audience"></bean>
 	<bean id="actor" class="com.howellxu.aop.Actor"></bean>
+	<bean id="thinker" class="com.howellxu.aop.Volunteer"></bean>
+	<bean id="magician" class="com.howellxu.aop.Magician"></bean>
+	
 	
 	<!-- 进行aop配置 -->
 	<aop:config>	
 	  <!-- 配置日志切面 -->
-	  <aop:aspect ref="audience">	
+	  <aop:aspect id="asp_perform" ref="audience">	
 	  <aop:pointcut expression="execution(* com.howellxu.aop.Actor.perform(..))" id="perform"/> 	  
 	  <aop:around pointcut-ref="perform" method="watchPerformance"/>
+	  </aop:aspect>
+	  
+	  <aop:aspect id="asp_thinker" ref="magician">
+	  	<aop:pointcut id="thinking" 
+	  		expression="execution(* com.howellxu.aop.Thinker.thinkOfSomething(String)) and args(thoughts)" />
+	  	<aop:before pointcut-ref="thinking" method="interceptorThoughts" arg-names="thoughts" />
+	  	
 	  </aop:aspect>
 	</aop:config>
 	
