@@ -13,5 +13,5 @@
 	<!-- bean工厂方式创建bean -->
 	<bean id="Stage" class="com.howellxu.beanFactory.Stage" factory-method="getInstance"></bean>
 	
-	
+	<import resource="spring-config-aop.xml"/>
 </beans>
