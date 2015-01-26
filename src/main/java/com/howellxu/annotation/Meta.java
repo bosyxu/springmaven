@@ -17,10 +17,9 @@ public class Meta {
 		try{
 			Class<?> cl = ob.getClass();
 			Method method = cl.getMethod("myMeth");
-			MyAnno anno = method.getAnnotation(MyAnno.class);
-			System.out.println(anno.str() + "," + anno.val());
+			
 		}catch(Exception e){
-			System.out.println("Method is not Found");
+			
 		}
 
 	}
@@ -28,7 +27,7 @@ public class Meta {
 	
 	public static void main(String[] args) {
 		
-		myMeth();
+		
 
 	}
 
