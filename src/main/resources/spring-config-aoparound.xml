@@ -11,16 +11,34 @@
 	
 	<bean id="audience" class="com.howellxu.aop.Audience"></bean>
 	<bean id="actor" class="com.howellxu.aop.Actor"></bean>
+
+	<!-- 为通知传递参数 -->
 	<bean id="thinker" class="com.howellxu.aop.Volunteer"></bean>
 	<bean id="magician" class="com.howellxu.aop.Magician"></bean>
+	<!-- 使用AOP引入新功能的BEAN -->
+	<bean id="contestant" class="com.howellxu.aop.GraciousContestant"></bean>
 	
 	
 	<!-- 进行aop配置 -->
 	<aop:config>	
+	 <aop:aspect>
+	  <aop:declare-parents types-matching="com.howellxu.aop.Actor+" 
+	  	implement-interface="com.howellxu.aop.Contestant"
+	  	delegate-ref="contestant"/>
+<!-- default-impl="com.howellxu.aop.GraciousContestant" --> 
+	  </aop:aspect>
+	
 	  <!-- 配置日志切面 -->
 	  <aop:aspect id="asp_perform" ref="audience">	
+	   
 	  <aop:pointcut expression="execution(* com.howellxu.aop.Actor.perform(..))" id="perform"/> 	  
 	  <aop:around pointcut-ref="perform" method="watchPerformance"/>
+	  <!-- AOP引入增加新功能 不能在这里配置-->
+	  <!-- Note that <aop:config> sees beans before aspects are applied, 
+	  		therefore I guess that you can't use methods introduced by <aop:declare-parents> 
+	  		in other aspect declarations. -->
+	  <!-- <aop:after pointcut-ref="perform" method="receiveAward"/> -->
+	  <!-- AOP引入增加新功能 end -->
 	  </aop:aspect>
 	  
 	  <aop:aspect id="asp_thinker" ref="magician">
@@ -29,6 +47,7 @@
 	  	<aop:before pointcut-ref="thinking" method="interceptorThoughts" arg-names="thoughts" />
 	  	
 	  </aop:aspect>
+  
 	</aop:config>
 	
 </beans>
